@@ -95,7 +95,7 @@
   </script>
 
   <div class="max-w-3xl mx-auto py-10 px-4">
-    <button id="musicBtn" onclick="toggleMusic()" class="flex items-center gap-2 bg-[#C9A7EB] text-white px-4 py-2 rounded-full shadow-md hover:scale-105 transition">
+    <button id="musicBtn" onclick="toggleMusic()" class="hidden flex items-center gap-2 bg-[#C9A7EB] text-white px-4 py-2 rounded-full shadow-md hover:scale-105 transition">
       <span id="musicIcon">🔈</span>
       <span id="musicLabel">Putar Musik</span>
     </button>  
@@ -244,12 +244,24 @@
     }
 
     function startStory() {
+      const music = document.getElementById('bgMusic');
+      const icon = document.getElementById('musicIcon');
+      const label = document.getElementById('musicLabel');
+
+      music.muted = false;
+      music.play().then(() => {
+        icon.innerText = '🔊';
+        label.innerText = 'Pause Musik';
+      }).catch(() => {
+        console.log('Autoplay blocked or failed.');
+      });
+
+      document.getElementById('musicBtn').classList.remove('hidden');
       document.getElementById('opening').style.display = 'none';
       sections[currentSection].classList.add('active');
       document.getElementById('navButtons').style.display = 'flex';
       updateNavButtons();
     }
-
 
     function prevSection() {
       sections[currentSection].classList.remove('active');
