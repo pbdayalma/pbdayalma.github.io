@@ -52,6 +52,35 @@
         padding: 0 10px;
       }
     }
+
+    .section-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .section-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .section-content img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 1rem;
+      margin-left: auto;
+      margin-right: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .section-content img:hover {
+      transform: scale(1.03);
+    }
+
+
   </style>
 </head>
 <body class="text-[#4A4A4A]">
@@ -66,52 +95,69 @@
   </script>
 
   <div class="max-w-3xl mx-auto py-10 px-4">
-    <div class="flex justify-center items-center flex-wrap gap-4 mb-6">
-      <button onclick="nextSection()" class="bg-[#A3D2CA] text-white px-6 py-2 rounded-full shadow-md hover:scale-105 transition">Klik untuk Lanjut</button>
-      <button onclick="playMusic()" class="bg-[#C9A7EB] text-white px-4 py-2 rounded-full shadow-md hover:scale-105 transition">Putar Musik</button>
+    <button id="musicBtn" onclick="toggleMusic()" class="flex items-center gap-2 bg-[#C9A7EB] text-white px-4 py-2 rounded-full shadow-md hover:scale-105 transition">
+      <span id="musicIcon">🔈</span>
+      <span id="musicLabel">Putar Musik</span>
+    </button>  
+    <div id="navButtons" class="flex justify-center items-center flex-wrap gap-4 mb-6" style="display: none;">
+      <button onclick="prevSection()" class="flex items-center gap-2 bg-[#C9A7EB] text-white px-4 py-2 rounded-full shadow-md hover:scale-105 active:scale-95 transition duration-200">
+        ⬅️ <span>Back</span>
+      </button>
+      <button onclick="nextSection()" class="flex items-center gap-2 bg-[#A3D2CA] text-white px-4 py-2 rounded-full shadow-md hover:scale-105 active:scale-95 transition duration-200">
+        <span>Next</span> ⏭️
+      </button>
     </div>
 
     <div id="sections" class="space-y-10">
-      <section class="section-content active">
-        <h1 class="text-3xl text-center font-semibold text-[#C9A7EB] mb-4">Untuk Sahabatku Shalma</h1>
+      <section id="opening" class="text-center">
+        <h1 class="text-3xl font-bold text-[#C9A7EB] mb-6">Halo Shalma ✨</h1>
+        <p class="text-lg mb-4">Aku bikin sesuatu buat kamu.</p>
+        <p class="text-lg mb-8">Cukup klik tombol di bawah untuk mulai yah.</p>
+        <button onclick="startStory()" class="bg-[#A3D2CA] text-white px-6 py-3 rounded-full shadow-md hover:scale-105 active:scale-95 transition text-lg">
+          💌 Start
+        </button>
+      </section>
+      <section class="section-content">
+        <h1 class="text-3xl text-center font-semibold text-[#C9A7EB] mb-4">Untuk Sahabatku</h1>
+        <img src="C:\Users\irsya\Desktop\ProjectBday\assets\cake.jpeg" alt="" class="rounded-xl mb-3 mx-auto" />
         <p class="text-center text-lg mb-8">
           Umur kamu sekarang: <span id="age"></span> tahun • Kita sudah berteman selama <span id="friendship"></span> tahun
         </p>
-        <p class="text-center text-xl">Klik tombol di atas untuk mulai membaca...</p>
       </section>
       <section class="section-content">
         <h2 class="text-2xl font-bold text-[#A3D2CA] mb-4">Tentang Hari Ini</h2>
-        <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" alt="" class="rounded-xl mb-3 mx-auto" />
+        <img src="C:\Users\irsya\Desktop\ProjectBday\assets\cake.jpeg" alt="" class="rounded-xl mb-3 mx-auto" />
         <p class="typewriter"><span></span></p>
       </section>
       <section class="section-content">
         <h2 class="text-2xl font-bold text-[#A3D2CA] mb-4">Hal-hal yang Aku Syukuri</h2>
-        <img src="https://source.unsplash.com/400x200/?gratitude" alt="" class="rounded-xl mb-3 mx-auto" />
+        <img src="C:\Users\irsya\Desktop\ProjectBday\assets\mountain.jpeg" alt="" class="rounded-xl mb-3 mx-auto" />
         <p class="typewriter"><span></span></p>
       </section>
       <section class="section-content">
         <h2 class="text-2xl font-bold text-[#A3D2CA] mb-4">Kenangan Kita</h2>
-        <img src="https://source.unsplash.com/400x200/?friends" alt="" class="rounded-xl mb-3 mx-auto" />
+        <img src="C:\Users\irsya\Desktop\ProjectBday\assets\cake.jpeg" alt="" class="rounded-xl mb-3 mx-auto" />
         <p class="typewriter"><span></span></p>
       </section>
       <section class="section-content">
         <h2 class="text-2xl font-bold text-[#A3D2CA] mb-4">Harapanku Buat Kamu</h2>
-        <img src="https://source.unsplash.com/400x200/?hope" alt="" class="rounded-xl mb-3 mx-auto" />
+        <img src="C:\Users\irsya\Desktop\ProjectBday\assets\cake.jpeg" alt="" class="rounded-xl mb-3 mx-auto" />
         <p class="typewriter"><span></span></p>
       </section>
       <section class="section-content">
         <h2 class="text-2xl font-bold text-[#A3D2CA] mb-4">Penutup</h2>
-        <img src="https://source.unsplash.com/400x200/?thankyou" alt="" class="rounded-xl mb-3 mx-auto" />
+        <img src="C:\Users\irsya\Desktop\ProjectBday\assets\cake.jpeg" alt="" class="rounded-xl mb-3 mx-auto" />
         <p class="typewriter"><span></span></p>
       </section>
       <section class="section-content">
         <h2 class="text-2xl font-bold text-[#A3D2CA] mb-4">Sampai Jumpa Lagi</h2>
-        <img src="https://source.unsplash.com/400x200/?goodbye" alt="" class="rounded-xl mb-3 mx-auto" />
+        <img src="C:\Users\irsya\Desktop\ProjectBday\assets\cake.jpeg" alt="" class="rounded-xl mb-3 mx-auto" />
         <p class="typewriter"><span></span></p>
       </section>
     </div>
 
-    <audio id="bgMusic" src="music.mp3" autoplay loop></audio>
+    <audio id="bgMusic" src="C:\Users\irsya\Desktop\ProjectBday\assets\audio.mpeg" autoplay loop muted></audio>
+
   </div>
 
   <script>
@@ -125,11 +171,24 @@
     ageEl.innerText = currentYear - birthYear;
     friendEl.innerText = currentYear - startYear;
 
-    function playMusic() {
-      const music = document.getElementById('bgMusic');
+    function toggleMusic() {
+    const music = document.getElementById('bgMusic');
+    const icon = document.getElementById('musicIcon');
+    const label = document.getElementById('musicLabel');
+
+    if (music.paused || music.muted) {
       music.muted = false;
       music.play();
+      icon.innerText = '🔊';
+      label.innerText = 'Pause Musik';
+    } else {
+      music.pause();
+      icon.innerText = '🔈';
+      label.innerText = 'Putar Musik';
     }
+  }
+
+
 
     let currentSection = 0;
     const sections = document.querySelectorAll('.section-content');
@@ -137,16 +196,36 @@
 
     const messages = [
       "Hari ini kamu sudah tumbuh menjadi seseorang yang luar biasa. Dunia beruntung karena kamu ada di dalamnya.",
-      "Terima kasih karena selalu jadi pendengar yang baik, penyejuk di saat gelisah, dan sosok yang apa adanya.",
-      "Sejak 2011, terlalu banyak tawa dan cerita yang kita lalui. Terima kasih sudah ada selama itu.",
-      "Aku harap langkahmu selalu ringan, hatimu tenang, dan hidupmu penuh cinta yang hangat.",
+      "Terima kasih karena selalu jadi pendengar yang baik, penyejuk di saat gelisah, dan sosok yang begitu luar biasa.",
+      "Sejak 2011, terlalu banyak tawa, air mata dan cerita yang kita lalui. Terima kasih sudah ada selama itu.",
+      "Aku harap tahun ini dan kedepannya langkahmu selalu ringan, hatimu tenang, dan hidupmu penuh dengan kebahagian .",
       "Terima kasih karena sudah jadi bagian penting dalam hidupku. Semoga kita tetap saling mendoakan meski tak selalu bicara.",
-      "Kapan pun kamu membuka halaman ini lagi, aku akan tetap menyambutmu dengan hangat. Sampai ketemu di klik berikutnya 🤍"
+      "Kapan pun kamu membuka halaman ini lagi, aku akan tetap menyambutmu dengan hangat. Sampai ketemu di tahun berikutnya 🤍"
     ];
+
+    function updateNavButtons() {
+      const backBtn = document.querySelector('#navButtons button:first-child');
+      if (currentSection === 0) {
+        backBtn.style.display = 'none';
+      } else {
+        backBtn.style.display = 'flex';
+      }
+    }
+
 
     function nextSection() {
       sections[currentSection].classList.remove('active');
-      currentSection = (currentSection + 1) % sections.length;
+
+      currentSection++;
+
+      // Kalau sudah lewat section terakhir, kembali ke opening
+      if (currentSection >= sections.length) {
+        currentSection = 0;
+        document.getElementById('navButtons').style.display = 'none';
+        document.getElementById('opening').style.display = 'block';
+        return;
+      }
+
       sections[currentSection].classList.add('active');
 
       if (currentSection > 0 && currentSection < sections.length) {
@@ -158,9 +237,40 @@
           el.textContent += fullText.charAt(i);
           i++;
           if (i === fullText.length) clearInterval(interval);
-        }, 30);
+        }, 50);
       }
+
+      updateNavButtons();
     }
+
+    function startStory() {
+      document.getElementById('opening').style.display = 'none';
+      sections[currentSection].classList.add('active');
+      document.getElementById('navButtons').style.display = 'flex';
+      updateNavButtons();
+    }
+
+
+    function prevSection() {
+      sections[currentSection].classList.remove('active');
+      currentSection = (currentSection - 1 + sections.length) % sections.length;
+      sections[currentSection].classList.add('active');
+
+      if (currentSection > 0 && currentSection < sections.length) {
+        const el = typewriters[currentSection - 1];
+        el.innerText = '';
+        const fullText = messages[currentSection - 1];
+        let i = 0;
+        const interval = setInterval(() => {
+          el.textContent += fullText.charAt(i);
+          i++;
+          if (i === fullText.length) clearInterval(interval);
+        }, 50); // Bisa kamu ubah sesuai tempo yang kamu suka
+      }
+
+      updateNavButtons();
+    }
+
 
     window.addEventListener('load', () => {
       const music = document.getElementById('bgMusic');
