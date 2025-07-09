@@ -227,6 +227,15 @@
         currentSection = 0;
         document.getElementById('navButtons').style.display = 'none';
         document.getElementById('opening').style.display = 'block';
+
+        const music = document.getElementById('bgMusic');
+        const icon = document.getElementById('musicIcon');
+        const label = document.getElementById('musicLabel');
+
+        music.pause();
+        icon.innerText = '🔈';
+        label.innerText = 'Putar Musik';
+
         return;
       }
 
