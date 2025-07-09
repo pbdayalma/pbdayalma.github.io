@@ -169,6 +169,8 @@
     const birthYear = 1999;
     const startYear = 2011;
     const currentYear = new Date().getFullYear();
+    let typingInterval = null;
+
 
     ageEl.innerText = currentYear - birthYear;
     friendEl.innerText = currentYear - startYear;
@@ -220,7 +222,7 @@
 
       currentSection++;
 
-      // Kalau sudah lewat section terakhir, kembali ke opening
+      // Kalau sudah lewat section terakhir, balik ke opening
       if (currentSection >= sections.length) {
         currentSection = 0;
         document.getElementById('navButtons').style.display = 'none';
@@ -230,15 +232,21 @@
 
       sections[currentSection].classList.add('active');
 
-      if (currentSection > 0 && currentSection < sections.length) {
+      // Ketik ulang teks jika ada
+      if (currentSection > 0 && currentSection <= messages.length) {
         const el = typewriters[currentSection - 1];
         el.innerText = '';
         const fullText = messages[currentSection - 1];
         let i = 0;
-        const interval = setInterval(() => {
+
+        clearInterval(typingInterval); // Stop ketikan sebelumnya
+
+        typingInterval = setInterval(() => {
           el.textContent += fullText.charAt(i);
           i++;
-          if (i === fullText.length) clearInterval(interval);
+          if (i >= fullText.length) {
+            clearInterval(typingInterval);
+          }
         }, 50);
       }
 
@@ -270,21 +278,26 @@
       currentSection = (currentSection - 1 + sections.length) % sections.length;
       sections[currentSection].classList.add('active');
 
-      if (currentSection > 0 && currentSection < sections.length) {
+      // Ketik ulang teks jika ada
+      if (currentSection > 0 && currentSection <= messages.length) {
         const el = typewriters[currentSection - 1];
         el.innerText = '';
         const fullText = messages[currentSection - 1];
         let i = 0;
-        const interval = setInterval(() => {
+
+        clearInterval(typingInterval); // Stop ketikan sebelumnya
+
+        typingInterval = setInterval(() => {
           el.textContent += fullText.charAt(i);
           i++;
-          if (i === fullText.length) clearInterval(interval);
-        }, 50); // Bisa kamu ubah sesuai tempo yang kamu suka
+          if (i >= fullText.length) {
+            clearInterval(typingInterval);
+          }
+        }, 50);
       }
 
       updateNavButtons();
     }
-
 
     window.addEventListener('load', () => {
       const music = document.getElementById('bgMusic');
