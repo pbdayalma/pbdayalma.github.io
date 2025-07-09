@@ -204,7 +204,7 @@
       "Sejak 2011, terlalu banyak tawa, air mata dan cerita yang kita lalui. Terima kasih sudah ada selama itu.",
       "Aku harap tahun ini dan kedepannya langkahmu selalu ringan, hatimu tenang, dan hidupmu penuh dengan kebahagian .",
       "Terima kasih karena sudah jadi bagian penting dalam hidupku. Semoga kita tetap saling mendoakan meski tak selalu bicara.",
-      "Kapan pun kamu membuka halaman ini lagi, aku akan tetap menyambutmu dengan hangat. Sampai ketemu di tahun berikutnya 🤍"
+      getBirthdayCountdownText(), 
     ];
 
     function updateNavButtons() {
@@ -251,7 +251,7 @@
         clearInterval(typingInterval); // Stop ketikan sebelumnya
 
         typingInterval = setInterval(() => {
-          el.textContent += fullText.charAt(i);
+          el.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
           i++;
           if (i >= fullText.length) {
             clearInterval(typingInterval);
@@ -297,7 +297,7 @@
         clearInterval(typingInterval); // Stop ketikan sebelumnya
 
         typingInterval = setInterval(() => {
-          el.textContent += fullText.charAt(i);
+          el.innerHTML += fullText.charAt(i) === '\n' ? '<br>' : fullText.charAt(i);
           i++;
           if (i >= fullText.length) {
             clearInterval(typingInterval);
@@ -308,9 +308,32 @@
       updateNavButtons();
     }
 
+    function getBirthdayCountdownText() {
+      const now = new Date();
+      const thisYear = now.getFullYear();
+      const birthdayThisYear = new Date(`${thisYear}-03-16T00:00:00`);
+
+      // Kalau ulang tahun tahun ini sudah lewat, pakai tahun depan
+      const nextBirthday = now > birthdayThisYear
+        ? new Date(`${thisYear + 1}-03-16T00:00:00`)
+        : birthdayThisYear;
+
+      const diffMs = nextBirthday - now;
+
+      const totalMinutes = Math.floor(diffMs / 60000);
+      const days = Math.floor(totalMinutes / (60 * 24));
+      const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+      const minutes = totalMinutes % 60;
+
+      return `Kapan pun kamu membuka halaman ini lagi, aku akan tetap menyambutmu dengan hangat. Sampai ketemu di tahun berikutnya 🤍\n🎂 Ulang tahun kamu berikutnya dalam ${days} hari, ${hours} jam, ${minutes} menit lagi.`;
+    }
+
+
     window.addEventListener('load', () => {
       const music = document.getElementById('bgMusic');
       music.muted = true;
+    
+      updateBirthdayCountdown(); // ✅ Tambahkan ini
     });
   </script>
 </body>
