@@ -90,6 +90,8 @@
       snow.classList.add('falling');
       snow.style.left = `${Math.random() * 100}vw`;
       snow.style.animationDuration = `${5 + Math.random() * 5}s`;
+      snow.style.animationDelay = `${Math.random() * 5}s`;
+      snow.style.opacity = Math.random().toFixed(2);
       document.body.appendChild(snow);
     }
   </script>
