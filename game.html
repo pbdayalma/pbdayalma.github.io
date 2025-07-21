@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>FlappyBird</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background-color: #D6E6F2;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .falling {
+      position: fixed;
+      top: -50px;
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border-radius: 50%;
+      animation: fall linear infinite;
+      z-index: 10;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    #canvas {
+      background-color: #30c0df;
+      border: 2px solid black;
+      display: block;
+      margin: 80px auto 20px auto;
+      position: relative;
+      z-index: 50;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+    }
+
+    .back-button button {
+      background-color: #A3D2CA;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .back-button button:hover {
+      transform: scale(1.05);
+    }
+
+    .back-button button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ❄️ Efek Salju -->
+  <script>
+    for (let i = 0; i < 40; i++) {
+      const snow = document.createElement('div');
+      snow.classList.add('falling');
+      snow.style.left = `${Math.random() * 100}vw`;
+      snow.style.animationDuration = `${5 + Math.random() * 5}s`;
+      snow.style.animationDelay = `${Math.random() * 5}s`;
+      snow.style.opacity = Math.random().toFixed(2);
+      document.body.appendChild(snow);
+    }
+  </script>
+
+  <!-- 🔙 Tombol Kembali -->
+  <div class="back-button">
+    <button onclick="window.location.href='index.html'">🏠 Kembali</button>
+  </div>
+
+  <!-- 🎮 Canvas Game -->
+  <canvas id="canvas" width="276" height="414"></canvas>
+
+  <!-- 🔁 Fokus Otomatis ke Canvas -->
+  <script>
+    window.addEventListener("load", () => {
+      const canvas = document.getElementById("canvas");
+      canvas.focus();
+    });
+  </script>
+
+  <!-- 🎮 Game Logic -->
+  <script src="game.js"></script>
+
+</body>
+</html>

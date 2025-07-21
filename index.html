@@ -119,6 +119,11 @@
         <button onclick="startStory()" class="bg-[#A3D2CA] text-white px-6 py-3 rounded-full shadow-md hover:scale-105 active:scale-95 transition text-lg">
           💌 Start
         </button>
+        <br>
+        <br>
+        <button id="gameBtn" onclick="goToGame()" class="hidden bg-[#F4978E] text-white px-6 py-3 rounded-full shadow-md hover:scale-105 active:scale-95 transition text-lg">
+          <span>🎮 Main Game</span>
+        </button>        
       </section>
       <section class="section-content">
         <h1 class="text-3xl text-center font-semibold text-[#C9A7EB] mb-4">Untuk Sahabatku</h1>
@@ -237,6 +242,8 @@
         icon.innerText = '🔈';
         label.innerText = 'Putar Musik';
 
+        document.getElementById('gameBtn').classList.remove('hidden');
+
         return;
       }
 
@@ -333,9 +340,37 @@
     window.addEventListener('load', () => {
       const music = document.getElementById('bgMusic');
       music.muted = true;
-    
-      updateBirthdayCountdown(); // ✅ Tambahkan ini
+
+      // Dapatkan elemen
+      const ageEl = document.getElementById('age');
+      const friendEl = document.getElementById('friendship');
+
+      // Hitung umur akurat
+      const birthDate = new Date(1999, 6, 26); // Maret = 2
+      // const birthDate = new Date(1999, 2, 16); // Maret = 2
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+
+      const hasBirthdayPassed =
+        today.getMonth() > birthDate.getMonth() ||
+        (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+
+      if (!hasBirthdayPassed) {
+        age--;
+      }
+
+      const friendship = today.getFullYear() - 2011;
+
+      // Isi ke elemen
+      ageEl.innerText = age;
+      friendEl.innerText = friendship;
+
+      updateBirthdayCountdown(); // tetap panggil countdown juga
     });
+
+    function goToGame() {
+      window.location.href = 'game.html';
+    }
   </script>
 </body>
 </html>
